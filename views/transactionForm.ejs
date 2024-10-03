@@ -1,14 +1,7 @@
 <form id="transaction-form">
   <h2>Transaction Form</h2>
-  <%- include('inputField', {name: "orderId", label: "Order Id"}) %>
-  <%- include('inputField', {name: "customerName", label: "Customer Name"}) %>
-  <%- include('inputField', {name: "product", label: "Product"}) %>
-  <%- include('inputField', {name: "price", label: "Price"}) %>
-  <%- include('inputField', {name: "date", label: "Date"}) %>
-  <%- include('inputField', {name: "transactionType", label: "Transaction Type"}) %>
-  <%- include('inputField', {name: "transactionDate", label: "Transaction Date"}) %>
-  <%- include('inputField', {name: "transactionAmount", label: "Transaction Amount"}) %>
+  <textarea name="transactions"></textarea>
   <hr />
-  <button type="submit">Add a transaction</button>
+  <button type="submit">Add transactions</button>
   <button id="reset-transactions" type="button">Reset Transactions</button>
 </form>

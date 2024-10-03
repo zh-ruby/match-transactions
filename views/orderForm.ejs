@@ -1,11 +1,7 @@
 <form id="order-form">
   <h2>Order Form</h2>
-  <%- include('inputField', {name: "orderId", label: "Order Id"}) %>
-  <%- include('inputField', {name: "customerName", label: "Customer Name"}) %>
-  <%- include('inputField', {name: "product", label: "Product"}) %>
-  <%- include('inputField', {name: "price", label: "Price"}) %>
-  <%- include('inputField', {name: "date", label: "Date"}) %>
+  <textarea name="orders"></textarea>
   <hr />
-  <button type="submit">Add an order</button>
+  <button type="submit">Add orders</button>
   <button id="reset-orders" type="button">Reset Orders</button>
 </form>
