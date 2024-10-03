@@ -5,7 +5,8 @@ import type {
   IOrder,
   ITransaction,
 } from "../../types"
-import wordSimilarity from "../../utils/wordSimilarity"
+// import wordSimilarity from "../../utils/wordSimilarity"
+import compareWords from "../../utils/stringSimilarity"
 
 const matchTransactions = (orders: IOrder[], transactions: ITransaction[]) => {
   const matchedRecords: result[] = orders.map((o: IOrder) => [o])
@@ -13,10 +14,10 @@ const matchTransactions = (orders: IOrder[], transactions: ITransaction[]) => {
   transactions.forEach((t: ITransaction) => {
     let weight = 0, index = -1
     orders.forEach((o: IOrder, i: number) => {
-      const dateSimilarty = wordSimilarity(t.date, o.date)
-      const orderIdSimilarty = wordSimilarity(t.orderId, o.orderId)
-      const customerNameSimilarty = wordSimilarity(t.customerName, o.customerName)
-      const priceSimilarty = wordSimilarity(t.price.toString(), o.price.toString())
+      const dateSimilarty = compareWords(t.date, o.date)
+      const orderIdSimilarty = compareWords(t.orderId, o.orderId)
+      const customerNameSimilarty = compareWords(t.customerName, o.customerName)
+      const priceSimilarty = compareWords(t.price.toString(), o.price.toString())
       if (
         dateSimilarty >= 0.8 &&
         priceSimilarty >= 0.8 &&
