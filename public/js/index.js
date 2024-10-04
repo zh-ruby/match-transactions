@@ -32,6 +32,13 @@ const addTransactions = (e) => {
   document.getElementById('transactions-fields').innerText = localStorage.getItem('transactions')
 }
 
+const createElement = (element, color, content) => {
+  const ele = document.createElement(element)
+  ele.style.color = color
+  ele.innerHTML = content
+  return ele
+}
+
 const matchTransactions = async () => {
   const orders = localStorage.getItem('orders') ? JSON.parse(localStorage.getItem('orders')) : []
   const transactions = localStorage.getItem('transactions') ? JSON.parse(localStorage.getItem('transactions')) : []
@@ -45,7 +52,32 @@ const matchTransactions = async () => {
   })
   const data = await result.json()
   const dataField = document.getElementById('data-fields')
-  dataField.innerText = JSON.stringify(data.result)
+  dataField.innerHTML = ""
+  data.result.map(d => {
+    if (d instanceof Array) {
+      const oDiv = createElement('oDiv', 'red', JSON.stringify(d[0]))
+      const hr = createElement('hr', null, null)
+      for (let i = 1; i < d.length; i++) {
+        const tDiv = createElement('div', 'blue', JSON.stringify(d[i]))
+        const approveBtn = createElement('button', 'blue', 'Approve')
+        const rejectBtn = createElement('button', 'red', 'Reject')
+        oDiv.append(tDiv)
+        oDiv.append(approveBtn)
+        oDiv.append(rejectBtn)
+        approveBtn.addEventListener('click', () => {
+          approveBtn.style.display = 'none'
+          rejectBtn.style.display = 'none'
+        })
+        rejectBtn.addEventListener('click', () => {
+          tDiv.style.display = 'none'
+          approveBtn.style.display = 'none'
+          rejectBtn.style.display = 'none'
+        })
+      }
+      dataField.append(oDiv)
+      dataField.append(hr)
+    }
+  })
 }
 
 const resetOrders = () => {
